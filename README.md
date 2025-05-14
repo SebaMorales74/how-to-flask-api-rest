@@ -40,11 +40,7 @@ En este proyecto, hemos encapsulado toda la lógica de conexión en la clase `Da
 
 ### Variables de Entorno
 
-<div style="display: flex; justify-content: center; gap: 20px;">
 <img src="https://cdn-icons-png.flaticon.com/512/8631/8631491.png" alt="Variables de Entorno" width="200"/>
-
-<img src="https://images.seeklogo.com/logo-png/33/2/python-logo-png_seeklogo-332789.png" alt="Variables de Entorno" width="200"/>
-</div>
 
 </div>
 
