@@ -8,7 +8,7 @@ Group=ec2-user
 WorkingDirectory=/home/ec2-user/flask-app
 Environment="PATH=/home/ec2-user/flask-app/venv/bin"
 EnvironmentFile=/home/ec2-user/flask-app/.env
-ExecStart=/home/ec2-user/flask-app/venv/bin/gunicorn --workers 3 --bind unix:flask-app.sock -m 007 wsgi:app
+ExecStart=/home/ec2-user/flask-app/venv/bin/gunicorn --workers 3 --bind 127.0.0.1:8000 wsgi:app
 Restart=always
 
 [Install]
