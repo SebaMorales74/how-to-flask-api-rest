@@ -20,7 +20,7 @@ print_status "Actualizando el sistema..."
 sudo dnf update -y
 
 print_status "Instalando dependencias del sistema..."
-sudo dnf install -y python3 python3-pip python3-venv nginx git
+sudo dnf install -y python3 python3-pip nginx git
 
 print_status "Creando directorio de la aplicación..."
 sudo mkdir -p $APP_DIR
@@ -33,7 +33,7 @@ source $VENV_DIR/bin/activate
 
 print_status "Instalando dependencias Python..."
 pip install --upgrade pip
-pip install gunicorn flask mysql-connector-python python-dotenv
+pip install -r $APP_DIR/requirements.txt
 
 # Si existe requirements.txt, instalar desde ahí
 if [ -f "requirements.txt" ]; then
