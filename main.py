@@ -8,6 +8,7 @@ app = Flask(__name__)
 # Carga la configuración de la base de datos desde el archivo .env
 # Establece la conexión a la base de datos
 db: Database = Database(app)
+db.init_db()
 
 
 @app.route('/api/books', methods=['GET'])

@@ -88,6 +88,15 @@ class Database:
             )
         ''')
 
+        # Crear datos de prueba si es necesario
+        # Puedes agregar aquí la lógica para insertar datos de prueba en la tabla
+        # Por ejemplo, para insertar un libro de prueba:
+        cursor.execute('''
+            INSERT INTO books (title, author) VALUES ('Libro de Prueba', 'Autor de Prueba')
+        ''')
+
+        # Si necesitas crear más tablas, puedes hacerlo aquí
+        # Asegúrate de definir las tablas y sus campos según tus necesidades
         # Ejemplo:
         # cursor.execute('''
         #     CREATE TABLE IF NOT EXISTS users (
