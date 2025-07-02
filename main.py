@@ -1,8 +1,24 @@
 from flask import Flask, jsonify, request, g
 from utils.db import Database
+import os
+from dotenv import load_dotenv
+import logging
+
+# Cargar variables de entorno
+load_dotenv()
 
 # Inicializa la aplicación Flask
 app = Flask(__name__)
+
+# Configuración de la aplicación
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
+app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+
+# Configuración de logging para producción
+if not app.debug:
+    logging.basicConfig(level=logging.INFO)
+    app.logger.setLevel(logging.INFO)
+    app.logger.info('Flask app startup')
 
 # Inicializa la configuración de la base de datos
 # Carga la configuración de la base de datos desde el archivo .env
