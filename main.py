@@ -11,7 +11,6 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configuración de la aplicación
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-key-change-in-production')
 app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
 
 # Configuración de logging para producción
@@ -205,7 +204,3 @@ def delete_book(book_id: int):
     cursor.close()
     # Mostrar un mensaje de confirmación
     return jsonify({"message": "Libro eliminado"}), 200
-
-
-if __name__ == '__main__':
-    app.run(debug=True, port=5000)

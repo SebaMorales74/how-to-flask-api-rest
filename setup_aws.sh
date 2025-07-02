@@ -50,15 +50,12 @@ sudo systemctl daemon-reload
 sudo systemctl enable $SERVICE_NAME
 
 print_status "Configurando Nginx..."
-sudo cp nginx.conf /etc/nginx/conf.d/flask-app.conf
-sudo cp proxy_params /home/ec2-user/flask-app/
+sudo mkdir -p /etc/nginx/sites-available
+sudo mkdir -p /etc/nginx/sites-enabled
+sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 sudo cp nginx.conf /etc/nginx/sites-available/flask-app
-sudo ln -sf /etc/nginx/sites-available/flask-app /etc/nginx/sites-enabled/
-sudo cp proxy_params /home/ec2-user/flask-app/
-
-# Remover configuración por defecto de Nginx si existe
-sudo rm -f /etc/nginx/sites-enabled/default
-sudo rm -f /etc/nginx/conf.d/default.conf
+sudo ln -s /etc/nginx/sites-available/flask-app /etc/nginx/sites-enabled/
+sudo cp proxy_params /etc/nginx/proxy_params
 
 print_status "Verificando configuración de Nginx..."
 sudo nginx -t
@@ -75,12 +72,19 @@ echo ""
 echo "Estado de Nginx:"
 sudo systemctl status nginx --no-pager
 
+print_status "Configurando firewall..."
+sudo firewall-cmd --permanent --add-service=http
+sudo firewall-cmd --permanent --add-service=https
+sudo firewall-cmd --reload
+
+print_status "Realizando petición de prueba a la aplicación..."
+curl -I http://localhost:5000 || echo "⚠️ No se pudo realizar
+
 print_status "✅ Configuración completada!"
 echo ""
 echo "Para verificar que todo funciona:"
 echo "1. Verifica los logs: sudo journalctl -u $SERVICE_NAME -f"
-echo "2. Prueba la aplicación: curl http://localhost/api/books"
-echo "3. Verifica el socket: ls -la $APP_DIR/flask-app.sock"
+echo "2. Verifica el socket: ls -la $APP_DIR/flask-app.sock"
 echo ""
 echo "Para reiniciar la aplicación después de cambios:"
 echo "sudo systemctl restart $SERVICE_NAME"
