@@ -50,12 +50,15 @@ sudo systemctl daemon-reload
 sudo systemctl enable $SERVICE_NAME
 
 print_status "Configurando Nginx..."
+sudo cp nginx.conf /etc/nginx/conf.d/flask-app.conf
+sudo cp proxy_params /home/ec2-user/flask-app/
 sudo cp nginx.conf /etc/nginx/sites-available/flask-app
 sudo ln -sf /etc/nginx/sites-available/flask-app /etc/nginx/sites-enabled/
 sudo cp proxy_params /home/ec2-user/flask-app/
 
 # Remover configuración por defecto de Nginx si existe
 sudo rm -f /etc/nginx/sites-enabled/default
+sudo rm -f /etc/nginx/conf.d/default.conf
 
 print_status "Verificando configuración de Nginx..."
 sudo nginx -t

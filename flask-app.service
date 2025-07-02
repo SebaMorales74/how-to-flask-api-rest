@@ -8,7 +8,7 @@ User=ec2-user
 Group=ec2-user
 WorkingDirectory=/home/ec2-user/flask-app
 Environment="PATH=/home/ec2-user/flask-app/venv/bin"
-EnvironmentFile=/home/ec2-user/flask-app/.env
+EnvironmentFile=/home/ec2-user/flask-app/.env.production
 ExecStart=/home/ec2-user/flask-app/venv/bin/gunicorn --workers 3 --bind unix:/home/ec2-user/flask-app/flask-app.sock wsgi:app
 ExecReload=/bin/kill -s HUP $MAINPID
 KillMode=mixed
