@@ -72,11 +72,6 @@ echo ""
 echo "Estado de Nginx:"
 sudo systemctl status nginx --no-pager
 
-print_status "Configurando firewall..."
-sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --permanent --add-service=https
-sudo firewall-cmd --reload
-
 print_status "Realizando petición de prueba a la aplicación..."
 curl -I http://localhost:5000 || echo "⚠️ No se pudo realizar la petición de prueba a la aplicación."
 
