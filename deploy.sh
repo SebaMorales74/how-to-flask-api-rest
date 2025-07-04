@@ -24,6 +24,8 @@ sudo systemctl restart nginx
 
 echo "Reiniciando los Demonios..."
 sudo systemctl daemon-reload
+echo "Verificando la configuración de NGINX..."
+sudo nginx -t
 echo "Verificando el estado de NGINX..."
 sudo systemctl status nginx
 
