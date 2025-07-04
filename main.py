@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, g
+from flask import Flask, jsonify, request
 from utils.db import Database
 import os
 from dotenv import load_dotenv
@@ -17,7 +17,7 @@ app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
 if not app.debug:
     logging.basicConfig(level=logging.INFO)
     app.logger.setLevel(logging.INFO)
-    app.logger.info('Flask app startup')
+    app.logger.info('Flask desplegada en modo producción')
 
 # Inicializa la configuración de la base de datos
 # Carga la configuración de la base de datos desde el archivo .env
@@ -204,3 +204,7 @@ def delete_book(book_id: int):
     cursor.close()
     # Mostrar un mensaje de confirmación
     return jsonify({"message": "Libro eliminado"}), 200
+
+if __name__ == '__main__':
+    # Ejecutar la aplicación Flask
+    app.run(host='127.0.0.1', port=5000, debug=app.config['DEBUG'])
