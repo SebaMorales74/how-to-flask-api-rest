@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from utils.db import Database
 import os
 from dotenv import load_dotenv
@@ -9,6 +10,15 @@ load_dotenv()
 
 # Inicializa la aplicación Flask
 app = Flask(__name__)
+
+# Configurar CORS para permitir solicitudes desde cualquier origen
+CORS(app, resources={
+    r"/api/*": {
+        "origins": "*",
+        "methods": ["GET", "POST", "PUT", "DELETE"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 # Configuración de la aplicación
 app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
