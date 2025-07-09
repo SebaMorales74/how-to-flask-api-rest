@@ -35,6 +35,22 @@ if not app.debug:
 db: Database = Database(app)
 db.init_db()
 
+@app.route('/')
+def index():
+    """
+    ## Sirve la página index.html que está en la raíz del proyecto.
+
+    * URI: http://localhost:5000/
+    * Metodo: GET
+    :return: Contenido del archivo index.html.
+    :rtype: HTML
+    """
+    if os.path.exists('index.html'):
+        with open('index.html', 'r') as file:
+            return file.read(), 200, {'Content-Type': 'text/html'}
+    else:
+        return jsonify({"error": "Archivo index.html no encontrado"}), 404
+
 
 @app.route('/api/books', methods=['GET'])
 def get_books():

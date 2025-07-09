@@ -71,18 +71,17 @@
             }
 
             detectApiUrl() {
-                //const protocol = window.location.protocol;
-                //const hostname = window.location.hostname;
-                //const port = window.location.port ? `:${window.location.port}` : '';
+                const protocol = window.location.protocol;
+                const hostname = window.location.hostname;
+                const port = window.location.port ? `:${window.location.port}` : '';
                 
                 // Si estamos en desarrollo local, usar puerto 5000 para Flask
-                //if (hostname === 'localhost' || hostname === '127.0.0.1') {
-                //    return `${protocol}//${hostname}:5000`;
-                //}
+                if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                    return `${protocol}//${hostname}:5000`;
+                }
                 
                 // Si estamos en producción, usar el mismo dominio
-                //return `${protocol}//${hostname}${port}`;
-                return "http://ec2-52-207-164-37.compute-1.amazonaws.com/"
+                return `${protocol}//${hostname}${port}`;
             }
 
             init() {
